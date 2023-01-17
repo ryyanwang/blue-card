@@ -40,7 +40,9 @@ const Dashboard = () => {
       <Card className="centerCard">
         <Card.Body>
           <h2 className="text-center mb-4">
-            {data?.firstname} {data?.lastname}
+            <strong>
+              {data?.firstname} {data?.lastname}
+            </strong>
           </h2>
 
           {error && <Alert variant="danger"> {error}</Alert>}

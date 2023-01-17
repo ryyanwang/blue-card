@@ -22,3 +22,34 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+.testCard {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.testText {
+  display: block;
+  box-sizing: border-box;
+  width: 100% !important;
+  /* margin-top: 0.5rem !important; */
+  text-align: center !important;
+  position: relative;
+  line-height: 100px;
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+}
+
+.hidden {
+  opacity: 0s;
+  transition: all 1s;
+}
+
+.show {
+  opacity: 1s;
+}

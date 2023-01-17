@@ -3,7 +3,7 @@ import { Form, Button, Card, Alert } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 import { getDownloadURL, uploadBytes, ref } from "firebase/storage";
-import { storageRef } from "../firebase";
+import { auth, storageRef } from "../firebase";
 import "./styling.css";
 
 export default function Signup() {
@@ -111,9 +111,13 @@ export default function Signup() {
               }}
             />
           </Form.Group>
-          <Form.Group id="checkbox">
+          <Form.Group
+            id="checkbox"
+            className="checkbox"
+            style={{ paddingTop: 5 }}
+          >
             <input type="checkbox" />
-            <Form.Label>
+            <Form.Label style={{ paddingTop: 10, paddingLeft: 10 }}>
               "I certify that I am a Science Undergraduate student at the
               University of British Columbia"
             </Form.Label>
@@ -124,7 +128,7 @@ export default function Signup() {
           </Button>
         </Form>
       </Card.Body>
-      <div className="w-100 text-center mt-2">
+      <div className="w-100 text-center mt-2 ">
         Already have an account? <Link to="/login">Log in</Link>
       </div>
     </Card>
