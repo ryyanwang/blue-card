@@ -1,6 +1,11 @@
 import React, { useContext, useState, useEffect } from "react";
 import { auth, db } from "../firebase";
 import { setDoc, doc } from "firebase/firestore";
+// const nodemailer = require("nodemailer");
+
+// var transport = nodemailer.createTransport({
+//   host: "sus",
+// });
 
 const AuthContext = React.createContext();
 

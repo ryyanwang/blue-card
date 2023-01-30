@@ -3,7 +3,7 @@ import { Form, Button, Card, Alert } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 import { getDownloadURL, uploadBytes, ref } from "firebase/storage";
-import { auth, storageRef } from "../firebase";
+import { storageRef } from "../firebase";
 import "./styling.css";
 
 export default function Signup() {
@@ -14,6 +14,7 @@ export default function Signup() {
   const yearRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
+  const checkboxRef = useRef();
   //const file = useRef();
   const navigate = useNavigate();
   const [imageUpload, setImageUpload] = useState(null);
@@ -26,6 +27,11 @@ export default function Signup() {
   async function handleSubmit(e) {
     e.preventDefault();
 
+    if (!checkboxRef.current.checked) {
+      return setError(
+        "Please confirm that you are a Science Undergraduate student"
+      );
+    }
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
       return setError("Passwords do not match");
     }
@@ -68,7 +74,7 @@ export default function Signup() {
       setError("Failed to create an account");
     }
 
-    navigate("/");
+    navigate("/login");
     setLoading(false);
   }
 
@@ -116,7 +122,7 @@ export default function Signup() {
             className="checkbox"
             style={{ paddingTop: 5 }}
           >
-            <input type="checkbox" />
+            <input type="checkbox" ref={checkboxRef} />
             <Form.Label style={{ paddingTop: 10, paddingLeft: 10 }}>
               "I certify that I am a Science Undergraduate student at the
               University of British Columbia"
@@ -126,11 +132,11 @@ export default function Signup() {
             {" "}
             Sign Up{" "}
           </Button>
+          <div className="w-100 text-center mt-2 ">
+            Already have an account? <Link to="/login">Login</Link>
+          </div>
         </Form>
       </Card.Body>
-      <div className="w-100 text-center mt-2 ">
-        Already have an account? <Link to="/login">Log in</Link>
-      </div>
     </Card>
   );
 }

@@ -37,12 +37,12 @@ export default function ForgotPassword() {
               <Form.Label>Email</Form.Label>
               <Form.Control type="email" ref={emailRef} required />
             </Form.Group>
-            <Button disabled={loading} className="w-100" type="submit">
+            <Button disabled={loading} className="w-100 mt-3" type="submit">
               {" "}
               Reset Password{" "}
             </Button>
           </Form>
-          <div className="w-100 text-center mt3">
+          <div className="w-100 text-center mt-2">
             <Link to="/login"> Login </Link>
           </div>
         </Card.Body>

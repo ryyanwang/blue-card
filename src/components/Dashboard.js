@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Card, Button, Alert } from "react-bootstrap";
+import { Card, Button, Alert, Image, Badge } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
@@ -36,25 +36,48 @@ const Dashboard = () => {
     return <h1> Loading... </h1>;
   }
   return (
-    <>
-      <Card className="centerCard">
-        <Card.Body>
+    <div className="container col d-flex flex-wrap align-items-center">
+      <Card
+        className="centerCardPhoto w-100"
+        bg="light"
+        style={{ borderRadius: "20px" }}
+      >
+        <Card.Header
+          as="h1"
+          className="text-center"
+          style={{ border: "white" }}
+        >
+          {data?.firstname} {data?.lastname}
+        </Card.Header>
+        <Card.Body className="idBody">
           <h2 className="text-center mb-4">
-            <strong>
-              {data?.firstname} {data?.lastname}
-            </strong>
+            <strong></strong>
           </h2>
-
+          {/* <Image
+            fluid="true"
+            rounded="true"
+            src={data?.image}
+            className="image"
+            alt="Responsive image"
+          ></Image> */}
+          {/* <Card.Img src={data?.image} alt="Responsive image" /> */}
           {error && <Alert variant="danger"> {error}</Alert>}
-          <img src={data?.image} className="img" alt="Responsive image" />
+          <img
+            src={data?.image}
+            className="image centerCard"
+            alt="Responsive image"
+          />
         </Card.Body>
-        <div className="w-100 text-center mt-2">
-          <Button variant="link" onClick={handleLogout}>
+        <div className="w-100 text-center mt-1">
+          <Button variant="outline-primary mb-3" onClick={handleLogout}>
             Log Out
           </Button>
         </div>
+        <Card.Footer className="text-right" style={{ border: "white" }}>
+          <Badge bg="secondary"> Approved </Badge>
+        </Card.Footer>
       </Card>
-    </>
+    </div>
   );
 };
 export default Dashboard;

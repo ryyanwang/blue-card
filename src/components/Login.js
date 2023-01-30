@@ -26,34 +26,52 @@ export default function Login() {
   }
 
   return (
-    <div>
-      <Card>
-        <Card.Body>
-          <h2 className="text-center mb-4"> Login</h2>
+    <Card className="centerCard">
+      <Card.Body>
+        <h2 className="text-center mb-4"> Login</h2>
 
-          {error && <Alert variant="danger">{error}</Alert>}
-          <Form onSubmit={handleSubmit}>
-            <Form.Group id="email">
-              <Form.Label>Email</Form.Label>
-              <Form.Control type="email" ref={emailRef} required />
-            </Form.Group>
-            <Form.Group id="password">
-              <Form.Label>Password</Form.Label>
-              <Form.Control type="password" ref={passwordRef} required />
-            </Form.Group>
-            <Button disabled={loading} className="w-100" type="submit">
-              {" "}
-              Login{" "}
-            </Button>
-          </Form>
-          <div className="w-100 text-center mt3">
-            <Link to="/forgot-password"> Forgot Password? </Link>
+        {error && <Alert variant="danger">{error}</Alert>}
+        <Form onSubmit={handleSubmit}>
+          <Form.Group id="email">
+            <Form.Label>Email</Form.Label>
+            <Form.Control type="email" ref={emailRef} required />
+          </Form.Group>
+          <Form.Group id="password">
+            <Form.Label>Password</Form.Label>
+            <Form.Control type="password" ref={passwordRef} required />
+          </Form.Group>
+          <Button disabled={loading} className="signupButton" type="submit">
+            {" "}
+            Login{" "}
+          </Button>
+        </Form>
+        <div className="w-100 text-center mt3">
+          <Link className="font-weight-bold" to="/forgot-password">
+            Forgot Password?
+          </Link>
+        </div>
+        <div>
+          <h6 className="light-text"> or</h6>
+        </div>
+        <div className="centerTest">
+          {/* <Form.Label className="text-center">
+            Don't have an account yet? .
+          </Form.Label>
+          <Link className="font-weight-bold text" to="/signup">
+            Signup
+          </Link> */}
+          <div className="w-100 text-center mt-2 ">
+            Don't have an account yet? <Link to="/signup">Sign Up</Link>
           </div>
-        </Card.Body>
-      </Card>
-      <div className="w-100 text-center mt-2">
-        Need an account? <Link to="/signup"> Sign Up</Link>
-      </div>
-    </div>
+        </div>
+
+        {/* <div className="mx-auto">
+          <Button disabled={loading} className="w-75 mx-auto" type="submit">
+            {" "}
+            Signup{" "}
+          </Button>
+        </div> */}
+      </Card.Body>
+    </Card>
   );
 }
