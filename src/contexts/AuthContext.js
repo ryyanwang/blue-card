@@ -3,10 +3,21 @@ import { auth, db } from "../firebase";
 import { setDoc, doc } from "firebase/firestore";
 // const nodemailer = require("nodemailer");
 
-// var transport = nodemailer.createTransport({
-//   host: "sus",
+// const transporter = nodemailer.createTransport({
+//   host: "smtp.ethereal.email",
+//   auth: {
+//     user: "webmaster@sus.ubc.ca", // generated ethereal user
+//     pass: "Chromium20", // generated ethereal password
+//   },
 // });
-
+// let emailMessage = ""
+// let info = await transporter.sendMail({
+//   from: '"Fred Foo 👻" <foo@example.com>', // sender address
+//   to: "bar@example.com, baz@example.com", // list of receivers
+//   subject: "Welcome to Blue Card", // Subject line
+//   text: "Hello world?",
+//   html: "<b>Hello world?</b>",
+// });
 const AuthContext = React.createContext();
 
 export function useAuth() {

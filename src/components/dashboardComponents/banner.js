@@ -7,19 +7,16 @@ const Banner = (props) => {
         <div className="row">
           <h2>
             <div className="line" style={{ marginBottom: "0px" }}>
-              <span>Welcome back</span>{" "}
-              <div className="fixer">Welcome back</div>
+              <span>Welcome back</span>
             </div>
             <div
               className="line"
               style={{ fontSize: "2.8rem", marginBottom: "3px" }}
             >
-              <span>{props.fName}</span>{" "}
-              <div className="fixer">{props.fName}</div>
+              <span>{props.fName}</span>
             </div>
             <div className="line" style={{ fontSize: "3.3rem" }}>
               <span>{props.lName}</span>
-              <div className="fixer">{props.lName}</div>
             </div>
           </h2>
         </div>

@@ -58,6 +58,7 @@ export default function Login() {
       >
         Blue Card
       </h2>
+
       <h2 className="title">Sign in</h2>
       <div className="input-field">
         <i className="fas fa-envelope"></i>

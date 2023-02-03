@@ -4,8 +4,8 @@
   height: 70vh;
   display: flex;
 
-  //   visibility: hidden;
-  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 .img-container {
   width: 100vw;
@@ -117,7 +117,7 @@
 
 .headerContainer {
   height: 96px;
-  position: fixed;
+  position: absolute;
   width: 100%;
   z-index: 4;
   display: block;

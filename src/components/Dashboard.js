@@ -10,7 +10,7 @@ import Banner from "./dashboardComponents/banner";
 import { gsap } from "gsap";
 // import CSSRulePlugin from "gsap/CSSRulePlugin";
 import "./dashboard.scss";
-import susLogo from "./images/susLogo.png";
+import susLogo from "./images/susLogo2.png";
 
 const Dashboard = () => {
   const tl = gsap.timeline();
@@ -39,6 +39,7 @@ const Dashboard = () => {
   // let imageReveal = CSSRulePlugin.getRule(".img-container:after");
   let firstName = useRef(null);
   let lastName = useRef(null);
+  let id = useRef(null);
 
   useEffect(() => {
     let ctx = gsap.context(() => {
@@ -56,6 +57,18 @@ const Dashboard = () => {
           height: 0,
           ease: "expo.inOut",
         })
+        // .to(".smallText", {
+        //   fontSize: "2.8rem",
+        //   ease: "easeInOut",
+        //   delay: -1,
+        //   duration: 1.3,
+        // })
+        // .to(".largeText", {
+        //   fontSize: "3.3rem",
+        //   ease: "easeInOut",
+        //   delay: -1.3,
+        //   duration: 1.3,
+        // })
         .to(".intro-overlay", 0, {
           css: { display: "none" },
         });
@@ -91,17 +104,23 @@ const Dashboard = () => {
   image = data.image;
   firstName = data.firstname;
   lastName = data.lastname;
+  id = data.year;
   return (
     <>
       <div className="headerContainer">
         <div className="rowThingy">
           <div className="logoThingy">BLUECARD </div>
-          <img alt="" style={{ width: 50, height: 50 }} src={susLogo} />
+          <img
+            alt=""
+            style={{ width: "114px", height: "28px" }}
+            src={susLogo}
+          />
         </div>
       </div>
       <IntroOverlay />
 
       <Banner fName={firstName} lName={lastName} />
+
       <div className="dashboardContainer">
         {/* {data?.firstname} {data?.lastname} */}
         {error && <Alert variant="danger"> {error}</Alert>}
@@ -110,17 +129,26 @@ const Dashboard = () => {
             src={image}
             className="cardImage"
             alt=""
-            // Responsive image
+            // Res
+            ponsive
+            image
           />{" "}
-          <input
-            type="submit"
-            value="Logout"
-            style={{ marginTop: 12 }}
-            className="btn solid"
-            onClick={handleLogout}
-          />
+          <div
+            style={{ textAlign: "right", display: "block", fontWeight: "600" }}
+          >
+            ID= {id}
+          </div>
         </div>
+
+        <input
+          type="submit"
+          value="Logout"
+          style={{ marginTop: 12 }}
+          className="btn solid"
+          onClick={handleLogout}
+        />
       </div>
+
       <div style={{ width: "100vw", heigh: "50vh" }}>
         <iframe
           title="bluecardlocations"

@@ -62,12 +62,12 @@ export default function Signup() {
       await signup(emailRef.current.value, passwordRef.current.value);
       // here im making sure i successfuly sign up to the auth instance first before i put the information in the database
       console.log("succesffulyy auth");
-
+      let id = Math.round(Math.random() * (9999999 - 1000000) + 1000000);
       await signuptoDB(
         firstnameRef.current.value,
         lastnameRef.current.value,
         emailRef.current.value,
-        99,
+        id,
         imageURL
       );
       console.log("made through sign up on db");
@@ -77,7 +77,7 @@ export default function Signup() {
     }
 
     console.log("signup successful");
-    navigate("/");
+    navigate("/success");
     setLoading(false);
   }
 
