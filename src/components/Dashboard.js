@@ -1,83 +1,135 @@
-import React, { useState, useEffect } from "react";
-import { Card, Button, Alert, Image, Badge } from "react-bootstrap";
+import React, { useState, useEffect, useRef } from "react";
+import { Alert } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
-import "./styling.css";
+import IntroOverlay from "./dashboardComponents/introOverlay";
+import Banner from "./dashboardComponents/banner";
+import { gsap } from "gsap";
+// import CSSRulePlugin from "gsap/CSSRulePlugin";
+import "./dashboard.scss";
+import susLogo from "./images/susLogo.png";
 
-//default function Dashboard() {
 const Dashboard = () => {
+  const tl = gsap.timeline();
+
   const [error, setError] = useState("");
   const { logout, currentUser } = useAuth();
   const navigate = useNavigate();
+
   const { data, isLoading, refetch } = useQuery(["user"], () => {
     return getDoc(doc(db, "users", currentUser?.email)).then((user) =>
       user.data()
     );
   });
 
+  // const [animationComplete, setAnimationComplete] = useState(false);
+
+  // const completeAnimation = () => {
+  //   setAnimationComplete(true);
+  // };
   useEffect(() => {
     refetch();
   }, [currentUser, refetch]);
+  // ANIMATION STUFF
+  let image = useRef(null);
+  // let container = useRef(null);
+  // let imageReveal = CSSRulePlugin.getRule(".img-container:after");
+  let firstName = useRef(null);
+  let lastName = useRef(null);
+
+  useEffect(() => {
+    let ctx = gsap.context(() => {
+      tl.from(".line span", {
+        duration: 1.8,
+        y: 100,
+        ease: "power4.out",
+        skewY: 7,
+        stagger: {
+          amount: 0.3,
+        },
+      })
+        .to(".overlay-top", {
+          duration: 1.3,
+          height: 0,
+          ease: "expo.inOut",
+        })
+        .to(".intro-overlay", 0, {
+          css: { display: "none" },
+        });
+    });
+    return () => ctx.revert();
+    // homeAnimation(completeAnimation);
+    // tl.to(
+    //   container,
+    //   {
+    //     duration: 1,
+    //   },
+    //   { css: { visibility: "visible" } }
+    // );
+    // tl.to(imageReveal, 1.4, { width: "0%", ease: Power2.easeInOut });
+  });
 
   async function handleLogout() {
     setError("");
     try {
       await logout();
-      navigate("/login");
+      navigate("/auth");
     } catch {
       setError("error Logging Out");
     }
   }
 
   if (isLoading) {
-    return <h1> Loading... </h1>;
+    return (
+      <div style={{ height: "100vh", backgroundColor: "black" }}>{/*  */}</div>
+    );
   }
+
+  image = data.image;
+  firstName = data.firstname;
+  lastName = data.lastname;
   return (
-    <div className="container col d-flex flex-wrap align-items-center">
-      <Card
-        className="centerCardPhoto w-100"
-        bg="light"
-        style={{ borderRadius: "20px" }}
-      >
-        <Card.Header
-          as="h1"
-          className="text-center"
-          style={{ border: "white" }}
-        >
-          {data?.firstname} {data?.lastname}
-        </Card.Header>
-        <Card.Body className="idBody">
-          <h2 className="text-center mb-4">
-            <strong></strong>
-          </h2>
-          {/* <Image
-            fluid="true"
-            rounded="true"
-            src={data?.image}
-            className="image"
-            alt="Responsive image"
-          ></Image> */}
-          {/* <Card.Img src={data?.image} alt="Responsive image" /> */}
-          {error && <Alert variant="danger"> {error}</Alert>}
-          <img
-            src={data?.image}
-            className="image centerCard"
-            alt="Responsive image"
-          />
-        </Card.Body>
-        <div className="w-100 text-center mt-1">
-          <Button variant="outline-primary mb-3" onClick={handleLogout}>
-            Log Out
-          </Button>
+    <>
+      <div className="headerContainer">
+        <div className="rowThingy">
+          <div className="logoThingy">BLUECARD </div>
+          <img alt="" style={{ width: 50, height: 50 }} src={susLogo} />
         </div>
-        <Card.Footer className="text-right" style={{ border: "white" }}>
-          <Badge bg="secondary"> Approved </Badge>
-        </Card.Footer>
-      </Card>
-    </div>
+      </div>
+      <IntroOverlay />
+
+      <Banner fName={firstName} lName={lastName} />
+      <div className="dashboardContainer">
+        {/* {data?.firstname} {data?.lastname} */}
+        {error && <Alert variant="danger"> {error}</Alert>}
+        <div className="img-container">
+          <img
+            src={image}
+            className="cardImage"
+            alt=""
+            // Responsive image
+          />{" "}
+          <input
+            type="submit"
+            value="Logout"
+            style={{ marginTop: 12 }}
+            className="btn solid"
+            onClick={handleLogout}
+          />
+        </div>
+      </div>
+      <div style={{ width: "100vw", heigh: "50vh" }}>
+        <iframe
+          title="bluecardlocations"
+          src="https://www.google.com/maps/d/embed?mid=1-cQNxoKmeWvm4mY0AR4D9nQN6UUmWNY&ehbc=2E312F"
+          width="100%"
+          height="300px"
+        ></iframe>
+      </div>
+    </>
   );
 };
 export default Dashboard;

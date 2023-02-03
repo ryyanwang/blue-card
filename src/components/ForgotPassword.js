@@ -1,7 +1,8 @@
 import React, { useRef, useState } from "react";
-import { Form, Button, Card, Alert } from "react-bootstrap";
+import { Alert } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import "./style.scss";
 
 export default function ForgotPassword() {
   const emailRef = useRef();
@@ -16,8 +17,11 @@ export default function ForgotPassword() {
       setMessage("");
       setError("");
       setLoading(true);
+
       await resetPassword(emailRef.current.value);
-      setMessage("Check your inbox for further instructions");
+      setMessage(
+        "Email sent successfully. Check your inbox for further instructions"
+      );
     } catch {
       setError("Failed to Reset Password");
     }
@@ -26,30 +30,46 @@ export default function ForgotPassword() {
   }
 
   return (
-    <div>
-      <Card>
-        <Card.Body>
-          <h2 className="text-center mb-4"> Password Reset</h2>
+    <div className="forgotPassword">
+      <form
+        className="sign-in-form"
+        style={{ justifyContent: "center", display: "" }}
+      >
+        {error && (
+          <Alert className="alert" variant="danger">
+            {error}
+          </Alert>
+        )}
+        {message && (
+          <Alert className="positiveAlert" variant="danger">
+            {message}
+          </Alert>
+        )}
+        <h2 className="title"> Forgot your password?</h2>
+        <p> Please enter the email you used to create your account</p>
 
-          {error && <Alert variant="danger">{error}</Alert>}
-          <Form onSubmit={handleSubmit}>
-            <Form.Group id="email">
-              <Form.Label>Email</Form.Label>
-              <Form.Control type="email" ref={emailRef} required />
-            </Form.Group>
-            <Button disabled={loading} className="w-100 mt-3" type="submit">
-              {" "}
-              Reset Password{" "}
-            </Button>
-          </Form>
-          <div className="w-100 text-center mt-2">
-            <Link to="/login"> Login </Link>
-          </div>
-        </Card.Body>
-      </Card>
-      <div className="w-100 text-center mt-2">
-        Need an account? <Link to="/signup"> Sign Up</Link>
-      </div>
+        <div className="input-field">
+          <i className="fas fa-envelope"></i>
+          <input
+            id="email"
+            type="email"
+            placeholder="Email"
+            ref={emailRef}
+            required
+          />
+        </div>
+
+        <input
+          disabled={loading}
+          type="submit"
+          value="Reset Password"
+          className="btn solid"
+          onClick={handleSubmit}
+        />
+        <div className="w-100 text-center mt-2">
+          Back to <Link to="/auth">homepage</Link>
+        </div>
+      </form>{" "}
     </div>
   );
 }
