@@ -12,8 +12,9 @@
   max-width: 400px;
   position: relative;
   overflow: hidden;
-  padding-left: 60px;
-  padding-right: 60px;
+  padding-top: 10px;
+  padding-left: 80px;
+  padding-right: 80px;
   &:after {
     position: absolute;
     content: "";
@@ -34,7 +35,7 @@
     .overlay-top {
       position: absolute;
       height: 100%;
-      background: black;
+      background: rgb(0, 0, 0);
       // rgb(66, 128, 235) 0%;
       bottom: 0;
       left: 0;
@@ -115,6 +116,13 @@
   }
 }
 
+.susLogo {
+  position: absolute;
+  height: 70vh;
+  z-index: -50;
+  scale: 100%;
+  filter: blur(5px);
+}
 .headerContainer {
   height: 96px;
   position: absolute;

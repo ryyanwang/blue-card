@@ -10,7 +10,8 @@ import Banner from "./dashboardComponents/banner";
 import { gsap } from "gsap";
 // import CSSRulePlugin from "gsap/CSSRulePlugin";
 import "./dashboard.scss";
-import susLogo from "./images/susLogo2.png";
+import susLogo2 from "./images/susLogo2.png";
+import suslogo from "./images/susLogo.png";
 
 const Dashboard = () => {
   const tl = gsap.timeline();
@@ -113,11 +114,18 @@ const Dashboard = () => {
           <img
             alt=""
             style={{ width: "114px", height: "28px" }}
-            src={susLogo}
+            src={susLogo2}
           />
         </div>
       </div>
-      <IntroOverlay />
+      <div
+        onClick={() => {
+          tl.progress(1).pause();
+          console.log("cancelled");
+        }}
+      >
+        <IntroOverlay />
+      </div>
 
       <Banner fName={firstName} lName={lastName} />
 
@@ -130,8 +138,8 @@ const Dashboard = () => {
             className="cardImage"
             alt=""
             // Res
-            ponsive
-            image
+            // ponsive
+            // image
           />{" "}
           <div
             style={{ textAlign: "right", display: "block", fontWeight: "600" }}
@@ -139,24 +147,26 @@ const Dashboard = () => {
             ID= {id}
           </div>
         </div>
-
+        {/* <img
+          src={suslogo}
+          className="susLogo"
+          alt=""
+          // Res
+          // ponsive
+          // image
+        /> */}
         <input
           type="submit"
           value="Logout"
-          style={{ marginTop: 12 }}
+          style={{ marginTop: 12, backgroundColor: "black" }}
           className="btn solid"
           onClick={handleLogout}
         />
       </div>
-
+      {/* 
       <div style={{ width: "100vw", heigh: "50vh" }}>
-        <iframe
-          title="bluecardlocations"
-          src="https://www.google.com/maps/d/embed?mid=1-cQNxoKmeWvm4mY0AR4D9nQN6UUmWNY&ehbc=2E312F"
-          width="100%"
-          height="300px"
-        ></iframe>
-      </div>
+    
+      </div> */}
     </>
   );
 };

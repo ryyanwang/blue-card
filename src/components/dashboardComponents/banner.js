@@ -15,7 +15,7 @@ const Banner = (props) => {
             >
               <span>{props.fName}</span>
             </div>
-            <div className="line" style={{ fontSize: "3.3rem" }}>
+            <div className="line" style={{ fontSize: "3.4rem" }}>
               <span>{props.lName}</span>
             </div>
           </h2>

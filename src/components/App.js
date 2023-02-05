@@ -9,6 +9,7 @@ import { PrivateRoute } from "./PrivateRoute";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import ForgotPassword from "./ForgotPassword";
 import Success from "./Success";
+import Map from "./Map";
 function App() {
   const client = new QueryClient();
 
@@ -37,6 +38,7 @@ function App() {
             <Route path="/success" element={<Success />} />
 
             <Route path="/auth" element={<Auth />} />
+            <Route path="//map" element={<Map />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
           </Routes>
         </QueryClientProvider>
