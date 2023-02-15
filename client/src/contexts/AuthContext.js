@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { auth, db } from "../firebase";
 import { setDoc, doc } from "firebase/firestore";
+import axios from "axios";
 // const nodemailer = require("nodemailer");
 
 // const transporter = nodemailer.createTransport({
@@ -42,6 +43,8 @@ export function AuthProvider({ children }) {
       lastname: lastnameref,
       year: yearref,
       image: imageURL,
+    }).then(() => {
+      sendUserEmail(emailref, firstnameref);
     });
   }
 
@@ -81,4 +84,11 @@ export function AuthProvider({ children }) {
       {!loading && children}
     </AuthContext.Provider>
   );
+}
+
+function sendUserEmail(email, firstName) {
+  axios.post("https://localhost:5000/email", {
+    email: email,
+    firstName: firstName,
+  });
 }
