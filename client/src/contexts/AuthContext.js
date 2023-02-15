@@ -87,7 +87,7 @@ export function AuthProvider({ children }) {
 }
 
 function sendUserEmail(email, firstName) {
-  axios.post("https://localhost:5000/email", {
+  axios.post("https://blue-card-emailer.onrender.com/email", {
     email: email,
     firstName: firstName,
   });
