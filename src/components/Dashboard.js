@@ -158,7 +158,7 @@ const Dashboard = () => {
         <input
           type="submit"
           value="Logout"
-          style={{ marginTop: 12, backgroundColor: "black" }}
+          style={{ marginTop: "8vh", backgroundColor: "black" }}
           className="btn solid"
           onClick={handleLogout}
         />
